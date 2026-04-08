@@ -1,6 +1,6 @@
 Flask
 gunicorn
-tensorflow
+tensorflow==2.15.0
 numpy
 joblib
 playwright
