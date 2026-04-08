@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckPhish | Advanced URL Intelligence</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="index-page">
+
+    <!-- Navbar removed -->
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="animated-text">CheckPhish Detects and Monitors Phishing and Scam Sites</h1>
+            <p class="tagline animated-text">Scan suspicious URLs and monitor for typosquats and lookalike variants of your domain using real-time neural intelligence.</p>
+       
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <div class="fw-bold" style="color: var(--primary-blue); border-bottom: 2px solid var(--primary-blue); padding-bottom: 5px;">
+                    <i class="fa-solid fa-magnifying-glass me-2"></i>URL Scanner
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="urlInput" placeholder="Enter URL to scan">
+                <button onclick="redirectToFinial()" class="scan-btn">Scan</button>
+            </div>
+
+            <div id="loader"><i class="fa-solid fa-circle-notch fa-spin me-2"></i>Analyzing threat vectors...</div>
+            <div id="result-box"></div>
+            <img id="site-screenshot" src="" alt="Analysis Screenshot" class="mx-auto">
+        </div>
+    </section>
+<section class="py-5">
+    <div class="container py-4" style="max-width: 100%; padding: 0 20px;">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-lg-8 col-xl-7 mx-auto" style="max-width: 100%;">
+                <div class="challenge-label mb-2">The Challenge</div>
+                <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Protect Users Against Phishing Attacks</h2>
+                <p class="text-muted fs-5">Phishing attacks are increasingly sophisticated, using deceptive URLs, typosquats, and hidden behavioral patterns to trick users. Manual detection is slow and error-prone, making automated detection essential.</p>
+            </div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-link"></i></div>
+                    <h2 class="stat-title">#1 Tactic</h2>
+                    <p class="text-muted small">Deceptive URLs are the most common method, appearing in over 40% of phishing attempts.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-globe"></i></div>
+                    <h2 class="stat-title">#2 Risk</h2>
+                    <p class="text-muted small">Nearly 35% of phishing sites use newly registered domains, targeting unsuspecting users.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-shield-virus"></i></div>
+                    <h2 class="stat-title">Millions Affected</h2>
+                    <p class="text-muted small">Phishing attacks lead to millions in financial losses and compromise sensitive user data annually.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="features-section">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-3">Join PhishGuard AI Today</h2>
+            <p class="mb-5 mx-auto" style="max-width: 700px; color: #94a3b8;">
+                Defend your digital perimeter with advanced neural analysis. Our platform provides the intelligence needed to stay ahead of modern phishing campaigns.
+            </p>
+            <div class="row g-4 text-start">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="fa-solid fa-microchip"></i></div>
+                        <h5>AI-Driven Extraction</h5>
+                        <p class="mb-0">Automatically extracts 13 mathematical features from every URL to detect malicious intent with deep learning precision.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="fa-solid fa-user-shield"></i></div>
+                        <h5>Secure Sandbox</h5>
+                        <p class="mb-0">View high-resolution screenshots of suspicious sites safely within our isolated environment to prevent local infections.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
+                        <h5>Real-Time Intelligence</h5>
+                        <p class="mb-0">Get instant probability scores and threat classifications. Monitor your brand against typosquats and lookalike domains.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function redirectToFinial() {
+            let urlInput = document.getElementById('urlInput');
+            let url = urlInput.value.trim();
+            
+            if (!url) {
+                alert("Please enter a URL first!");
+                return;
+            }
+
+            // Validate URL format
+            if (!isValidURL(url)) {
+                alert("Please enter a valid URL (e.g., https://example.com or example.com)");
+                return;
+            }
+
+            // Standard URL redirection to finial page
+            // We pass the URL as a query parameter so finial.html can pick it up
+            window.location.href = "/finial?url=" + encodeURIComponent(url);
+        }
+
+        function isValidURL(string) {
+            try {
+                // Add protocol if missing
+                if (!string.startsWith('http://') && !string.startsWith('https://')) {
+                    string = 'https://' + string;
+                }
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Optional: If you want to perform a "Quick Scan" on index page itself 
+        // using your app.py /scan route:
+        async function quickScan() {
+            let url = document.getElementById('urlInput').value.trim();
+            let loader = document.getElementById('loader');
+            let resultBox = document.getElementById('result-box');
+            
+            loader.style.display = 'block';
+            resultBox.style.display = 'none';
+
+            try {
+                const response = await fetch('/scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+                const data = await response.json();
+                
+                loader.style.display = 'none';
+                resultBox.style.display = 'block';
+                resultBox.style.borderColor = data.color;
+                resultBox.innerHTML = `<h4 style="color:${data.color}">${data.status}</h4><p>${data.message}</p>`;
+            } catch (error) {
+                console.error("Scan error:", error);
+                loader.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
