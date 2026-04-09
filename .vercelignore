@@ -1,9 +1,0 @@
-.git
-.gitignore
-__pycache__
-*.pyc
-.pytest_cache
-.env.local
-node_modules
-.venv
-venv
