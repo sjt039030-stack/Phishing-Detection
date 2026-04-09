@@ -1,0 +1,14 @@
+{
+  "buildCommand": "pip install --no-cache-dir -r requirements.txt && playwright install chromium",
+  "outputDirectory": ".",
+  "env": {
+    "PYTHONUNBUFFERED": "true"
+  },
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.11",
+      "memory": 3008,
+      "maxDuration": 30
+    }
+  }
+}
