@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard Real-Time Phishing Detection</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+<!-- ====== NAVBAR ====== -->
+<!-- <nav>
+    <div class="nav-container">
+        <a href="#" class="nav-brand">
+            <i class="fas fa-shield-virus"></i>
+            PhishGuard
+        </a>
+        <ul class="nav-menu">
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#threats">Threats</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#use-cases">Use Cases</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <a href="final.html" class="btn-nav btn-outline">
+                <i class="fas fa-play-circle"></i> Try Demo
+            </a>
+            <a href="#" class="btn-nav btn-primary">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </a>
+        </div>
+    </div>
+</nav> -->
+
+<nav>
+    <div class="nav-container">
+        <a href="#" class="nav-brand">
+            <i class="fas fa-shield-virus"></i>
+            PhishGuard
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#threats">Threats</a></li>
+            <li><a href="#features">Features</a></li>
+            
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="{{ url_for('finial') }}" class="btn-nav btn-nav-secondary" onclick="redirectToFinial()">
+                <i class="fas fa-rocket"></i> Try Demo
+            </a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = Array.from(document.querySelectorAll('.nav-menu a'));
+        const sections = navLinks
+            .map(link => link.getAttribute('href'))
+            .filter(href => href && href.startsWith('#'))
+            .map(hash => document.querySelector(hash))
+            .filter(Boolean);
+
+        function setActiveLinkByHash(hash) {
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === hash) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        function updateActiveOnScroll() {
+            const scrollPosition = window.scrollY + window.innerHeight * 0.25;
+            let activeHash = '#home';
+
+            for (const section of sections) {
+                if (section.offsetTop <= scrollPosition) {
+                    activeHash = '#' + section.id;
+                }
+            }
+
+            setActiveLinkByHash(activeHash);
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        window.addEventListener('scroll', updateActiveOnScroll, { passive: true });
+        window.addEventListener('hashchange', () => setActiveLinkByHash(window.location.hash || '#home'));
+        updateActiveOnScroll();
+    });
+</script>
+
+<!-- ====== HERO -->
+<section class="hero" id="home">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            AI-Powered Threat Intelligence â€” Active 24/7
+        </div>
+        <h1 class="hero-title">
+            Stop Phishing Attacks<br>
+            <span class="highlight">Before They Stop You</span>
+        </h1>
+        <p class="hero-subtitle">
+            PhishGuard uses advanced machine learning to detect malicious URLs, credential-stealing sites, and cyber threats in real time â€” protecting individuals, teams, and enterprises from evolving online dangers.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('finial') }}" class="btn-hero-primary">
+                <i class="fas fa-rocket"></i> Launch Demo
+            </a>
+            <a href="#how" class="btn-hero-secondary">
+                <i class="fas fa-info-circle"></i> How It Works
+            </a>
+        </div>
+        
+        <!-- Preview card -->
+        <div class="hero-visual"></div>
+            
+    </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section class="how" id="how">
+    <div class="section-container">
+        <div class="section-eyebrow">The Process</div>
+        <h2 class="section-title">How PhishGuard Works</h2>
+        <p class="section-subtitle">Three steps stand between you and a phishing attack. Our AI runs all of them in under two seconds.</p>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-icon"><i class="fas fa-link"></i></div>
+                <div class="step-title">Submit the URL</div>
+                <div class="step-desc">Paste any suspicious link into PhishGuard. Works with URLs from emails, SMS messages, social media, or anywhere else you encounter them online.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <div class="step-icon"><i class="fas fa-brain"></i></div>
+                <div class="step-title">AI Deep Analysis</div>
+                <div class="step-desc">Our multi-layered ML model checks domain age, SSL certificates, URL structure, redirect chains, brand impersonation patterns, and 40+ other threat signals simultaneously.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="step-title">Instant Verdict</div>
+                <div class="step-desc">Receive a clear risk report with threat classification, confidence score, and actionable recommendations â€” so you always know exactly what you're dealing with.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== THREATS ====== -->
+<section class="threats" id="threats">
+    <div class="section-container">
+        <div class="section-eyebrow">Threat Coverage</div>
+        <h2 class="section-title">Threats We Detect</h2>
+        <p class="section-subtitle">Our AI model is trained on millions of real-world attack patterns and continuously updated with emerging threat intelligence.</p>
+
+        <div class="threats-grid">
+            <div class="threat-card">
+                <div class="threat-icon-wrap"><i class="fas fa-headset"></i></div>
+                <div class="threat-content">
+                    <div class="threat-name">Tech Support Scams</div>
+                    <div class="threat-desc">Fake alerts claiming your device is infected, designed to trick you into calling scammers or granting remote access.</div>
+                </div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon-wrap"><i class="fas fa-credit-card"></i></div>
+                <div class="threat-content">
+                    <div class="threat-name">Credential Harvesting</div>
+                    <div class="threat-desc">Lookalike login pages impersonating banks, Google, Microsoft, and other trusted services to steal your username and password.</div>
+                </div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon-wrap"><i class="fas fa-clipboard-check"></i></div>
+                <div class="threat-content">
+                    <div class="threat-name">Fake Surveys & Prizes</div>
+                    <div class="threat-desc">Deceptive survey pages and fake prize notifications that harvest personal data or push malware downloads.</div>
+                </div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon-wrap"><i class="fas fa-truck"></i></div>
+                <div class="threat-content">
+                    <div class="threat-name">Delivery Impersonation</div>
+                    <div class="threat-desc">Spoofed shipping notifications from FedEx, DHL, or Amazon asking you to "verify" payment or personal details.</div>
+                </div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon-wrap"><i class="fas fa-virus"></i></div>
+                <div class="threat-content">
+                    <div class="threat-name">Malware Distribution</div>
+                    <div class="threat-desc">Sites hosting ransomware, spyware, trojans, or drive-by download scripts that execute silently in your browser.</div>
+                </div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon-wrap"><i class="fas fa-bitcoin-sign"></i></div>
+                <div class="threat-content">
+                    <div class="threat-name">Crypto Scams</div>
+                    <div class="threat-desc">Fake investment platforms, rug-pull token sites, cryptojacking pages, and wallet-draining smart contract links.</div>
+                </div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon-wrap"><i class="fas fa-building-columns"></i></div>
+                <div class="threat-content">
+                    <div class="threat-name">Banking Phishing</div>
+                    <div class="threat-desc">Pixel-perfect clones of banking portals designed to capture account credentials and one-time passwords in real time.</div>
+                </div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon-wrap"><i class="fas fa-envelope-open-text"></i></div>
+                <div class="threat-content">
+                    <div class="threat-name">Email Link Attacks</div>
+                    <div class="threat-desc">Malicious links embedded in HTML emails that use URL obfuscation, redirectors, or shortened URLs to evade filters.</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ====== FEATURES ====== -->
+<section class="features" id="features">
+    <div class="section-container">
+        <div class="section-eyebrow">Capabilities</div>
+        <h2 class="section-title">Why PhishGuard</h2>
+        <p class="section-subtitle">A purpose-built detection engine that goes far beyond simple URL blacklists.</p>
+
+        <div class="features-bento">
+            <div class="feat-card col-4">
+                <div class="feat-icon"><i class="fas fa-bolt"></i></div>
+                <div class="feat-title">Sub-2-Second Detection</div>
+                <div class="feat-desc">Parallel analysis pipelines deliver a complete threat verdict in under two seconds, so you never have to wait to know if a link is safe.</div>
+            </div>
+            <div class="feat-card col-4">
+                <div class="feat-icon"><i class="fas fa-brain"></i></div>
+                <div class="feat-title">Deep Learning Model</div>
+                <div class="feat-desc">Trained on 50M+ labeled URLs spanning 8 years of real-world phishing campaigns, our model generalizes to novel zero-day attacks.</div>
+            </div>
+            <div class="feat-card col-4">
+                <div class="feat-icon"><i class="fas fa-lock"></i></div>
+                <div class="feat-title">Zero Data Retention</div>
+                <div class="feat-desc">Scanned URLs are never stored, logged, or shared. Your privacy is architecturally guaranteed â€” not just promised in a policy.</div>
+            </div>
+
+            <div class="feat-card col-6">
+                <div class="feat-big-num">99.8%</div>
+                <div class="feat-title">Detection Accuracy</div>
+                <div class="feat-desc">Independently validated on a held-out test set of 2M URLs. Our false-positive rate is below 0.03% â€” meaning legitimate sites are almost never incorrectly flagged.</div>
+            </div>
+            <div class="feat-card col-6">
+                <div class="feat-icon"><i class="fas fa-certificate"></i></div>
+                <div class="feat-title">SSL & Certificate Analysis</div>
+                <div class="feat-desc">Full TLS inspection including certificate validity, issuer reputation, SAN mismatches, expiry checks, and detection of maliciously obtained certificates from trusted CAs.</div>
+            </div>
+
+            <div class="feat-card col-4">
+                <div class="feat-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="feat-title">IP & Geo Intelligence</div>
+                <div class="feat-desc">Hosting provider lookups, IP reputation scoring, and geolocation checks against known bullet-proof hosting networks.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== USE CASES ====== -->
+<section class="use-cases" id="use-cases">
+    <div class="section-container">
+        <div class="section-eyebrow">Who Uses PhishGuard</div>
+        <h2 class="section-title">Built for Everyone</h2>
+        <p class="section-subtitle">From individual users double-checking a suspicious email link to security teams processing millions of URLs per day.</p>
+
+        <div class="use-cases-grid">
+            <div class="use-case-card">
+                <div class="use-case-icon-wrap blue"><i class="fas fa-user-shield"></i></div>
+                <div>
+                    <div class="use-case-title">Individual Users</div>
+                    <div class="use-case-desc">Got a weird link in an email, text, or DM? Paste it into PhishGuard before you click. Takes two seconds and could save your bank account, identity, or device from compromise.</div>
+                    <div class="use-case-tags">
+                        <span class="tag tag-blue">Email Safety</span>
+                        <span class="tag tag-blue">Social Media</span>
+                        <span class="tag tag-blue">SMS Scams</span>
+                    </div>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon-wrap purple"><i class="fas fa-building"></i></div>
+                <div>
+                    <div class="use-case-title">Enterprise Security Teams</div>
+                    <div class="use-case-desc">Integrate our API into your SOAR, SIEM, or email gateway to auto-triage suspicious URLs at scale. Reduce analyst workload with automated phishing classification.</div>
+                    <div class="use-case-tags">
+                        <span class="tag tag-purple">SIEM Integration</span>
+                        <span class="tag tag-purple">API Access</span>
+                        <span class="tag tag-purple">SOC Automation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon-wrap cyan"><i class="fas fa-graduation-cap"></i></div>
+                <div>
+                    <div class="use-case-title">Security Educators</div>
+                    <div class="use-case-desc">Use PhishGuard in phishing awareness training to show employees real-world examples of phishing URLs and demonstrate exactly which signals give them away.</div>
+                    <div class="use-case-tags">
+                        <span class="tag tag-cyan">Awareness Training</span>
+                        <span class="tag tag-cyan">Demos</span>
+                        <span class="tag tag-cyan">Education</span>
+                    </div>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <div class="use-case-icon-wrap green"><i class="fas fa-code"></i></div>
+                <div>
+                    <div class="use-case-title">Developers & Researchers</div>
+                    <div class="use-case-desc">Build phishing detection into your own apps, browser extensions, or research pipelines. Our API returns structured JSON with per-signal scores for full interpretability.</div>
+                    <div class="use-case-tags">
+                        <span class="tag tag-blue">REST API</span>
+                        <span class="tag tag-blue">Webhooks</span>
+                        <span class="tag tag-cyan">Research</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== TESTIMONIALS ====== -->
+<section class="testimonials">
+    <div class="section-container">
+        <div class="section-eyebrow">What People Say</div>
+        <h2 class="section-title">Trusted by Security-Conscious Users</h2>
+        <p class="section-subtitle">From personal users to enterprise security professionals, PhishGuard earns trust every scan.</p>
+
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <div class="testi-quote">"</div>
+                <div class="testi-text">Our SOC team processes over 2,000 suspicious URL reports a week. Integrating PhishGuard's API into our triage workflow cut analyst time on URL investigations by 70%. The redirect chain tracing alone is worth it.</div>
+                <div class="testi-author">
+                    <div class="testi-avatar">SK</div>
+                    <div>
+                        <div class="testi-name">Siddharth K.</div>
+                        <div class="testi-role">Senior Threat Analyst, FinTech Company</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <div class="testi-quote">"</div>
+                <div class="testi-text">I got an "urgent" email from what looked like my bank. PhishGuard flagged it as phishing in 1.2 seconds â€” the domain was registered just 4 days prior. This tool literally saved my savings account.</div>
+                <div class="testi-author">
+                    <div class="testi-avatar">MR</div>
+                    <div>
+                        <div class="testi-name">Meera R.</div>
+                        <div class="testi-role">Independent User, Chennai</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <div class="testi-quote">"</div>
+                <div class="testi-text">We use PhishGuard in our employee security awareness sessions to demonstrate live phishing detection. The detailed risk breakdown â€” SSL, domain age, brand impersonation score â€” makes for incredibly compelling training material.</div>
+                <div class="testi-author">
+                    <div class="testi-avatar">AP</div>
+                    <div>
+                        <div class="testi-name">Arjun P.</div>
+                        <div class="testi-role">Cybersecurity Trainer, EdTech Startup</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== CTA ====== -->
+<section class="cta">
+    <div class="cta-card">
+        <h2 class="cta-title">Don't Click Blind. Scan First.</h2>
+        <p class="cta-sub">Try PhishGuard's live URL scanner right now â€” it's free, instant, and requires no sign-up. See exactly what our AI sees in every link.</p>
+        <div class="cta-actions">
+            <a href="{{ url_for('finial') }}" class="btn-cta btn-cta-primary">
+                <i class="fas fa-rocket"></i> Launch the Demo
+            </a>
+            <a href="#features" class="btn-cta btn-cta-secondary">
+                <i class="fas fa-book-open"></i> Learn More
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand-col">
+            <div class="footer-brand"><i class="fas fa-shield-virus"></i> PhishGuard</div>
+            <div class="footer-tagline">AI-powered real-time phishing and malicious URL detection. Protecting people and organisations since 2022.</div>
+        </div>
+        <div>
+            <div class="footer-col-title">Product</div>
+            <ul class="footer-links">
+                <li><a href="final.html">Live Scanner</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#">API Access</a></li>
+                <li><a href="#">Pricing</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Resources</div>
+            <ul class="footer-links">
+                <li><a href="#">Documentation</a></li>
+                <li><a href="#">API Reference</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Threat Reports</a></li>
+                <li><a href="#">Status</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Company</div>
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-copy">Â© 2025 PhishGuard. All rights reserved. Made with <i class="fas fa-heart" style="color:#ef4444;font-size:0.75rem;"></i> for cybersecurity.</div>
+        <div class="footer-socials">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
