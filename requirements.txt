@@ -1,6 +1,0 @@
-flask
-tensorflow==2.21.0
-numpy
-joblib
-flask-cors
-gunicorn
